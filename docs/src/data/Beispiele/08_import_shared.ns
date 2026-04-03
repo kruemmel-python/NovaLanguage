@@ -1,0 +1,12 @@
+dataset shared_notes {
+  items: [{text: "Importe machen Nova-Programme modular."}]
+}
+
+agent helper {
+  provider: shell
+  model: active
+  system_prompt: "Du bist ein einfacher Hilfsagent fuer Unterrichtsbeispiele."
+  prompts: {v1: "Fasse den Input kurz zusammen.\n\n{{input}}"}
+  prompt_version: v1
+}
+

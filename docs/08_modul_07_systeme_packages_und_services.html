@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 07: Systeme, Packages und Services</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 07: Systeme, Packages und Services</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden lernen, dass Nova Language auch Plattform- und Runtime-Strukturen beschreibt und damit ueber das hinausgeht, was in vielen Einfuehrungssprachen ueblich ist.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li><code>system</code>, <code>package</code> und <code>service</code> deklarativ einordnen</li>
+                <li>den Zusammenhang zwischen Programmlogik und Laufzeitkontext verstehen</li>
+                <li>Statusabfragen in Flows lesen</li>
+                <li>einfache Plattformmodelle erklaeren</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="src/data/Beispiele/07_system_service_package.ns">07_system_service_package.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>In Nova Language gehoeren technische Kontexte zum Sprachmodell. Dieses Modul sollte Dozierenden helfen, die Bruecke zwischen Programmiersprache und Runtime-Denken zu schlagen:</p>
+            <ul>
+                <li><code>system</code> beschreibt Kontext</li>
+                <li><code>package</code> beschreibt Artefakte</li>
+                <li><code>service</code> beschreibt deployte oder laufende Einheiten</li>
+            </ul>
+            <h2>Didaktischer Hinweis</h2>
+            <p>Dies ist kein Einstiegsmodul fuer absolute Programmierneulinge. Es ist ein spaeter Grundkursblock, in dem gezeigt wird, dass Nova Language eine Programmiersprache fuer Daten, Verhalten und Plattformkontext zugleich ist.</p>
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\07_system_service_package.ns"
+ns.run .\NovaLanguage\Beispiele\07_system_service_package.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+            <h3>Phase 1: Begriffsklaerung</h3>
+            <ul>
+                <li>Was ist ein Systemkontext</li>
+                <li>Was ist ein Paket</li>
+                <li>Was ist ein Service</li>
+            </ul>
+            <h3>Phase 2: Beispielgraph lesen</h3>
+            <ul>
+                <li>Deklarationen einzeln identifizieren</li>
+                <li>Beziehungen zwischen den Objekten markieren</li>
+            </ul>
+            <h3>Phase 3: Flow mit Statusabfragen</h3>
+            <ul>
+                <li><code>package.status</code></li>
+                <li><code>service.status</code></li>
+                <li><code>state.set</code></li>
+            </ul>
+            <h3>Phase 4: Diskussion</h3>
+            <ul>
+                <li>Warum ist das in der Sprache und nicht nur in externer YAML oder Shell-Skripten</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>System</li>
+                <li>Package</li>
+                <li>Service</li>
+                <li>Runtime-Kontext</li>
+                <li>Deployment-Sicht</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li><code>system</code> als blosse Kommentarhülle behandeln</li>
+                <li><code>package</code> und <code>service</code> durcheinanderwerfen</li>
+                <li>Plattformobjekte zu frueh vor Grundlagenthemen einfuehren</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Benenne <code>system</code>, <code>package</code> und <code>service</code> neu fuer ein Schulungsprojekt.</li>
+                <li>Fuege einen zweiten Service hinzu.</li>
+                <li>Diskutiere, welche Informationen in <code>system</code> und welche in <code>service</code> gehoeren.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Entwirf ein kleines Plattformmodell fuer eine Trainings- oder Monitoring-Umgebung mit einem <code>system</code>, einem <code>package</code> und einem <code>service</code>.</p>
+            <h2>Transferfrage</h2>
+            <p>Warum ist Nova Language fuer Infrastruktur- und Runtime-Denken besonders geeignet</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

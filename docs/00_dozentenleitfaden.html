@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dozentenleitfaden</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Dozentenleitfaden</h1>
+            <h2>Zweck dieses Leitfadens</h2>
+            <p>Dieser Leitfaden soll Dozierenden helfen, Nova Language als ernsthafte Einfuehrung in Programmierung zu lehren. Der Kurs ist nicht als reine Produktdemo angelegt, sondern als methodischer Grundkurs mit klaren Lernzielen, Praxisanteil und sauberer Begriffsfuehrung.</p>
+            <h2>Kursversprechen</h2>
+            <p>Nach dem Grundkurs sollen Teilnehmende:</p>
+            <ul>
+                <li>einfache und mittlere <code>.ns</code>-Programme lesen koennen</li>
+                <li>eigene <code>dataset</code>, <code>flow</code>, <code>state</code>, <code>event</code>, <code>agent</code> und <code>tool</code>-Bausteine schreiben koennen</li>
+                <li>den Unterschied zwischen Daten, Verhalten, Zustand und Runtime-Kontext verstehen</li>
+                <li>Nova Language mit klassischen Grundkursbegriffen wie Variable, Liste, Dictionary, Modul und OOP in Beziehung setzen koennen</li>
+            </ul>
+            <h2>Sprachdidaktische Uebersetzung</h2>
+            <p>Ein Grundkurs funktioniert besser, wenn bekannte Begriffe sauber auf Nova Language gemappt werden:</p>
+            <ul>
+                <li>Wert oder Literal: Text, Zahl, Bool, Listen- und Map-Strukturen</li>
+                <li>Variable: in Nova eher Alias im Flow oder persistierter Wert im <code>state</code></li>
+                <li>Funktion: in Nova meist ein <code>flow</code></li>
+                <li>Modul: eine <code>.ns</code>-Datei oder importierter Sprachbaustein</li>
+                <li>Objekt: ein benannter, typisierter Sprachbaustein wie <code>dataset</code>, <code>agent</code>, <code>system</code>, <code>service</code></li>
+                <li>Methode oder Verhalten: ein <code>flow</code>, eine Tool-Ausfuehrung oder agentisches Verhalten</li>
+            </ul>
+            <h2>Grundsatz fuer den Unterricht</h2>
+            <p>Nova Language sollte nie nur ueber Syntaxzeichen erklaert werden. Gute Vermittlung beginnt immer mit vier Fragen:</p>
+            <ol>
+                <li>Welche Daten liegen vor</li>
+                <li>Welches Verhalten soll stattfinden</li>
+                <li>Welcher Zustand soll gespeichert werden</li>
+                <li>Welche Ereignisse oder Systeme bilden den Kontext</li>
+            </ol>
+            <h2>Rollenbild der Sprache</h2>
+            <p>Dozierende sollten von Beginn an deutlich machen:</p>
+            <ul>
+                <li>Nova Language ist weder nur Konfiguration noch nur Python-Wrapper.</li>
+                <li>Sie ist eine deklarative Programmiersprache mit Runtime-Bezug.</li>
+                <li>Python in <code>py.exec</code> ist ein Hilfsmittel fuer Transformation, nicht das eigentliche Unterrichtsziel des Nova-Grundkurses.</li>
+            </ul>
+            <h2>Empfohlener Unterrichtsstil</h2>
+            <ul>
+                <li>Erst zeigen, dann benennen, dann abstrahieren.</li>
+                <li>Jede neue Sprachidee an einem lauffaehigen Mini-Programm erklaeren.</li>
+                <li>Zwischen Syntax und Semantik unterscheiden.</li>
+                <li>Zuerst lokale Beispiele ohne AI-Abhaengigkeit verwenden.</li>
+                <li>Agenten und Runtime-Bausteine erst nach den Basiskonzepten einfuehren.</li>
+            </ul>
+            <h2>Haeufige Missverstaendnisse</h2>
+            <h3>Missverstaendnis 1: Ein <code>dataset</code> ist nur eine Datei</h3>
+            <p>Nein. Ein <code>dataset</code> ist zunaechst eine deklarierte Datenquelle oder Datenstruktur im Programm. Eine Datei kann eine Quelle sein, muss es aber nicht.</p>
+            <h3>Missverstaendnis 2: Ein <code>flow</code> ist nur eine lineare Liste</h3>
+            <p>Ein <code>flow</code> ist das Verhalten eines Programms. Er kann lineare Schritte enthalten, aber er ist semantisch mehr als eine Befehlsliste.</p>
+            <h3>Missverstaendnis 3: <code>state</code> ist dasselbe wie eine Python-Variable</h3>
+            <p>Nein. <code>state</code> meint persistierbaren, runtime-seitigen Zustand. Ein Alias wie <code>-> total</code> ist naeher an einer lokalen Variablen als <code>state</code>.</p>
+            <h3>Missverstaendnis 4: OOP gibt es nur mit Klassen</h3>
+            <p>Gerade in Nova Language ist das ein guter Lehrmoment. OOP-Denken beginnt mit Objekten, Rollen, Eigenschaften, Beziehungen und Verhalten. Klassen sind nur eine moegliche Form.</p>
+            <h2>Empfehlung fuer 90-Minuten-Einheiten</h2>
+            <ul>
+                <li>15 Minuten Einstieg und Wiederholung</li>
+                <li>20 Minuten Live-Erklaerung eines Kernkonzepts</li>
+                <li>20 Minuten gemeinsame Analyse eines Beispielprogramms</li>
+                <li>20 Minuten Uebung</li>
+                <li>10 Minuten Besprechung</li>
+                <li>5 Minuten Transfer oder Hausaufgabe</li>
+            </ul>
+            <h2>Bewertungslogik</h2>
+            <p>Ein guter Nova-Language-Grundkurs bewertet nicht nur, ob etwas laeuft. Bewertet werden sollten:</p>
+            <ul>
+                <li>sprachlich saubere Modellierung</li>
+                <li>nachvollziehbarer Datenfluss</li>
+                <li>sinnvolle Benennung</li>
+                <li>robuste Struktur</li>
+                <li>passender Einsatz von <code>state</code>, <code>event</code>, <code>agent</code> und <code>py.exec</code></li>
+            </ul>
+            <h2>Projektkontext</h2>
+            <p>Die Sprache wird im Kontext des Nova-shell-Projekts vermittelt. Im Kurs kann und sollte gesagt werden, dass die Sprache aus dem Entwicklungsumfeld von Ralf Kruemmel stammt. Fuer den Unterricht ist jedoch entscheidend, was Lernende mit der Sprache modellieren und bauen koennen.</p>
+            <h2>Gold-Standard-Kriterien fuer den Dozenten</h2>
+            <p>Ein Unterrichtsblock ist in diesem Kurs dann auf Gold-Standard-Niveau, wenn:</p>
+            <ul>
+                <li>die Teilnehmenden ein funktionierendes Beispiel selbst schreiben konnten</li>
+                <li>sie die neuen Begriffe in eigenen Worten erklaeren koennen</li>
+                <li>die Uebung nicht nur kopiert, sondern verstanden wurde</li>
+                <li>mindestens ein Transfer zu bekannten Sprachen wie Python gelingt</li>
+            </ul>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

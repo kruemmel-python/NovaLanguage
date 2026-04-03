@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 03: Flows, Aliase und Datenfluss</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 03: Flows, Aliase und Datenfluss</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden verstehen, wie Daten in einem <code>flow</code> von Schritt zu Schritt weitergereicht werden und welche Rolle Aliase fuer Lesbarkeit und Denkstruktur spielen.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li>einen mehrstufigen <code>flow</code> lesen</li>
+                <li>den Pfeil <code>-></code> als Aliasbildung verstehen</li>
+                <li>Zwischenergebnisse sinnvoll benennen</li>
+                <li>Datenfluss statt nur Befehlsabfolge erkennen</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="src/data/Beispiele/03_alias_und_datenfluss.ns">03_alias_und_datenfluss.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>Dies ist das erste Modul, in dem sich Nova Language klar von einem klassischen Skriptkurs unterscheidet. Lernende sollen verstehen:</p>
+            <ul>
+                <li>Ein Flow ist eine Folge semantischer Verarbeitungsschritte.</li>
+                <li>Ein Alias wie <code>-> total</code> benennt das Ergebnis eines Schritts.</li>
+                <li>Gute Aliasnamen sind fuer Lesbarkeit und Wartung entscheidend.</li>
+            </ul>
+            <h2>Didaktischer Vergleich mit Python</h2>
+            <p>Python:</p>
+            <pre><code class="language-python">total = sum(item["value"] for item in numbers)
+summary = f"Gesamtsumme: {total}"</code></pre>
+            <p>Nova Language:</p>
+            <pre><code class="language-ns">py.exec "sum(item['value'] for item in _)" numbers -> total
+py.exec '"Gesamtsumme: {}".format(_)' total -> summary</code></pre>
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\03_alias_und_datenfluss.ns"
+ns.run .\NovaLanguage\Beispiele\03_alias_und_datenfluss.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+            <h3>Phase 1: Von Daten zu Verhalten</h3>
+            <ul>
+                <li><code>dataset</code> als Eingang</li>
+                <li><code>flow</code> als Verarbeitung</li>
+            </ul>
+            <h3>Phase 2: Aliasbildung erklaeren</h3>
+            <ul>
+                <li>Was bedeutet <code>-> total</code></li>
+                <li>Warum <code>total</code> besser ist als <code>x1</code></li>
+            </ul>
+            <h3>Phase 3: Datenfluss visualisieren</h3>
+            <ul>
+                <li>Eingang <code>numbers</code></li>
+                <li>Transformation zu <code>total</code></li>
+                <li>Transformation zu <code>summary</code></li>
+                <li>Ausgabe</li>
+            </ul>
+            <h3>Phase 4: Eigene Varianten</h3>
+            <ul>
+                <li>Durchschnitt statt Summe</li>
+                <li>Maximum statt Summe</li>
+                <li>Textuelle Ergebnisdarstellung anpassen</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>Alias</li>
+                <li>Datenfluss</li>
+                <li>Transformation</li>
+                <li>Zwischenergebnis</li>
+                <li>Lesbarkeit</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li>Aliasnamen ohne Aussagekraft</li>
+                <li>Eingabe <code>_</code> und benannte Aliase verwechseln</li>
+                <li>zu viel Python-Logik in einen einzigen Schritt packen</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Baue aus dem Beispiel eine Durchschnittsberechnung.</li>
+                <li>Fuege einen weiteren Schritt hinzu, der die Anzahl der Werte berechnet.</li>
+                <li>Benenne die Aliase so um, dass ein Dritter den Flow sofort versteht.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Schreibe einen <code>flow</code>, der aus einem <code>dataset</code> mit Punkten die Gesamtsumme und einen kurzen Bericht erzeugt.</p>
+            <h2>Transferfrage</h2>
+            <p>Warum ist saubere Aliasbildung in Nova Language didaktisch fast so wichtig wie Variablennamen in Python</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>
