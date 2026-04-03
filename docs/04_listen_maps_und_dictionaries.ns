@@ -1,0 +1,10 @@
+dataset students {
+  items: [{name: "Anna", score: 91, active: true}, {name: "Boris", score: 77, active: false}, {name: "Cem", score: 88, active: true}]
+}
+
+flow summarize_students {
+  py.exec "{item['name']: item['score'] for item in _}" students -> score_map
+  py.exec "'Aktive Teilnehmer: {}'.format(sum(1 for item in _ if item['active']))" students -> active_summary
+  system.log score_map
+  system.log active_summary
+}

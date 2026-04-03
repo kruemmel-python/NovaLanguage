@@ -1,0 +1,41 @@
+system course_runtime {
+  mode: local
+  observability: structured
+}
+
+state course_memory {
+  namespace: nova_language_object_model
+}
+
+tool announce {
+  command: system.log {{value0}}
+  capability: cpu
+  system: course_runtime
+}
+
+agent tutor {
+  provider: shell
+  model: active
+  memory: course_memory
+  tools: [announce]
+  system: course_runtime
+  system_prompt: "Du bist ein Tutor fuer das Objektmodell von Nova Language."
+  prompts: {v1: "Erklaere kurz, was an diesem Input Daten, Verhalten und Kontext ist.\n\n{{input}}"}
+  prompt_version: v1
+}
+
+dataset lesson_notes {
+  items: [{text: "Ein Dataset ist ein Datenobjekt."}, {text: "Ein Flow beschreibt Verhalten."}, {text: "Ein System beschreibt Kontext."}]
+}
+
+flow run_session {
+  tutor summarize lesson_notes -> object_view
+  state.set last_object_view object_view
+  announce object_view
+  event.emit session.ready object_view
+}
+
+event session_tick {
+  on: lesson.tick
+  flow: run_session
+}

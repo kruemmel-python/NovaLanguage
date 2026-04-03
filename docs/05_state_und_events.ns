@@ -1,0 +1,19 @@
+state lesson_state {
+  namespace: nova_language_course
+}
+
+dataset metrics {
+  items: [{value: 4}, {value: 6}, {value: 10}]
+}
+
+flow compute_metrics {
+  py.exec "sum(item['value'] for item in _)" metrics -> total
+  state.set latest_total total
+  event.emit metrics.ready total
+}
+
+event schedule_tick {
+  on: schedule.tick
+  flow: compute_metrics
+}
+

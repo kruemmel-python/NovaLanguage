@@ -1,0 +1,8 @@
+dataset course_info {
+  items: [{title: "Nova Language Grundkurs", lessons: 10, active: true, tags: ["intro", "nova", "grundkurs"]}, {title: "Nova Language Uebung", lessons: 3, active: false, tags: ["uebung", "praxis"]}]
+}
+
+flow show_course_info {
+  py.exec "json.dumps(_, ensure_ascii=False, indent=2)" course_info -> info
+  system.log info
+}
