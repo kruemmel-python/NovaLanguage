@@ -1,0 +1,26 @@
+system school_core {
+  tenant: academy
+  namespace: training
+  observability: structured
+}
+
+package teaching_sdk {
+  version: 1.0.0
+  source: ./dist/teaching-sdk.tar
+  auto_install: true
+}
+
+service training_api {
+  package: teaching_sdk
+  image: nova:training-api
+  replicas: 2
+  strategy: blue_green
+  auto_deploy: true
+}
+
+flow inspect_platform {
+  package.status teaching_sdk -> pkg
+  service.status training_api -> svc
+  state.set last_service_status svc
+}
+

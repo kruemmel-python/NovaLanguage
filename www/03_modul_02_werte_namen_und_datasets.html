@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 02: Werte, Namen und Datasets</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 02: Werte, Namen und Datasets</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden lernen, wie Werte und strukturierte Daten in Nova Language modelliert werden und warum <code>dataset</code> fuer den Grundkurs die zentrale Bruecke zu Listen und Dictionaries ist.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li>primitive und strukturierte Werte erkennen</li>
+                <li>Listen und Maps in Nova Language lesen</li>
+                <li><code>dataset</code> als deklarierte Datenquelle verstehen</li>
+                <li>gute Namen fuer Datensaetze und Felder vergeben</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="src/data/Beispiele/02_datasets_und_literale.ns">02_datasets_und_literale.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>Im Python-Kurs spricht man frueh ueber Strings, Integer, Booleans, Listen und Dictionaries. In Nova Language wird dieselbe Denkweise ueber Literale und <code>dataset</code>-Strukturen vermittelt.</p>
+            <p>Didaktisch wichtig:</p>
+            <ul>
+                <li><code>dataset</code> ist nicht nur Dateiladung.</li>
+                <li><code>dataset</code> kann Lernenden helfen, strukturierte Eingabedaten klar zu sehen.</li>
+                <li>Eine Liste von Objekten ist fuer viele Uebungen der ideale Einstieg.</li>
+            </ul>
+            <h2>Empfohlene Tafel- oder Folienstruktur</h2>
+            <ul>
+                <li>Text: <code>"Nova Language Grundkurs"</code></li>
+                <li>Zahl: <code>10</code></li>
+                <li>Bool: <code>true</code></li>
+                <li>Liste: <code>["intro", "nova", "grundkurs"]</code></li>
+                <li>Map: <code>{title: "Nova", lessons: 10}</code></li>
+            </ul>
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\02_datasets_und_literale.ns"
+ns.run .\NovaLanguage\Beispiele\02_datasets_und_literale.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+            <h3>Phase 1: Wiederholung</h3>
+            <ul>
+                <li>Was war ein <code>flow</code></li>
+                <li>Wie bekommt ein Programm Inhalte, ueber die es arbeitet</li>
+            </ul>
+            <h3>Phase 2: Literale und Strukturen</h3>
+            <ul>
+                <li>einzelne Werte</li>
+                <li>Listen von Werten</li>
+                <li>Maps beziehungsweise Dictionary-Strukturen</li>
+            </ul>
+            <h3>Phase 3: <code>dataset</code> lesen und erklaeren</h3>
+            <ul>
+                <li>Name des Datasets</li>
+                <li>Feld <code>items</code></li>
+                <li>einzelne Datensaetze in der Liste</li>
+            </ul>
+            <h3>Phase 4: Eigene Modellierung</h3>
+            <ul>
+                <li>Kursteilnehmer als Datensaetze modellieren</li>
+                <li>Kurstermine als Liste von Maps modellieren</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>Literal</li>
+                <li>Struktur</li>
+                <li>Feld</li>
+                <li>Liste</li>
+                <li>Map</li>
+                <li>Dataset</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li>inkonsistente Feldnamen in Datensaetzen</li>
+                <li>Verwechslung zwischen einem Dataset und einem einzelnen Eintrag</li>
+                <li>unklare Namensgebung wie <code>data1</code> oder <code>listx</code></li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Erweitere das Beispiel um ein drittes Kursobjekt.</li>
+                <li>Fuege einem Kurseintrag ein weiteres Feld wie <code>level</code> hinzu.</li>
+                <li>Erklaere, warum <code>items</code> als Liste gut fuer Grundkursbeispiele ist.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Modelliere eine Liste aus drei Buechern oder drei Sensoren als <code>dataset</code>.</p>
+            <h2>Transferfrage</h2>
+            <p>Welche Rolle spielt ein <code>dataset</code> in Nova Language im Vergleich zu einer Python-Liste aus Dictionaries</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

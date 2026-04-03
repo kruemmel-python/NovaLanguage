@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 09: Python-Brücke und Transformationen</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 09: Python-Bruecke und Transformationen</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden verstehen, warum <code>py.exec</code> in Nova Language ein wichtiges Werkzeug ist, aber nicht das Zentrum der Sprache darstellt.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li><code>py.exec</code> gezielt lesen und einsetzen</li>
+                <li>Nova Language und eingebettete Python-Transformation unterscheiden</li>
+                <li>kleine Transformationen sauber formulieren</li>
+                <li>Grenzen und Risiken ueberladener <code>py.exec</code>-Bloecke erkennen</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="src/data/Beispiele/09_python_bruecke.ns">09_python_bruecke.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>Die Python-Bruecke ist fuer den Grundkurs didaktisch sehr wertvoll:</p>
+            <ul>
+                <li>Lernende mit Python-Vorkenntnissen finden sofort einen Anknuepfungspunkt.</li>
+                <li>Gleichzeitig lernen sie, dass Nova Language selbst das uebergeordnete Strukturmodell liefert.</li>
+            </ul>
+            <p>Die Leitregel fuer Dozierende lautet:</p>
+            <ul>
+                <li>so viel Nova wie moeglich</li>
+                <li>so viel Python wie noetig</li>
+            </ul>
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\09_python_bruecke.ns"
+ns.run .\NovaLanguage\Beispiele\09_python_bruecke.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+            <h3>Phase 1: Einordnung</h3>
+            <ul>
+                <li>Warum gibt es <code>py.exec</code></li>
+                <li>Welche Aufgaben sind dafuer geeignet</li>
+            </ul>
+            <h3>Phase 2: Beispiel lesen</h3>
+            <ul>
+                <li>Eingabedaten</li>
+                <li>Transformation zu einer Map</li>
+                <li>textuelle Zusammenfassung</li>
+            </ul>
+            <h3>Phase 3: Gute und schlechte Nutzung</h3>
+            <ul>
+                <li>gut: kleine, klare Transformation</li>
+                <li>schlecht: komplette Programmlogik in einem einzigen Python-Block</li>
+            </ul>
+            <h3>Phase 4: Refactoring-Übung</h3>
+            <ul>
+                <li>zu lange <code>py.exec</code>-Ausdruecke kuerzen</li>
+                <li>Zwischenschritte mit Aliasen benennen</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>Python-Bruecke</li>
+                <li>Transformation</li>
+                <li>Interoperabilitaet</li>
+                <li>Pragmatismus</li>
+                <li>Lesbarkeit</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li>Nova Language nur als Container fuer Python behandeln</li>
+                <li>unlesbare Monolithen in <code>py.exec</code> schreiben</li>
+                <li>nicht mehr unterscheiden, welche Struktur im Flow gerade vorliegt</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Baue eine zweite Transformation ein, die den Mittelwert berechnet.</li>
+                <li>Teile einen langen <code>py.exec</code>-Schritt in zwei klar benannte Schritte auf.</li>
+                <li>Entscheide bei drei Beispielen, was besser in Nova und was besser in Python aufgehoben ist.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Nimm ein kleines <code>dataset</code> und erstelle zwei alternative Loesungen: einmal mit einer knappen Python-Bruecke und einmal mit maximaler Klarheit im Datenfluss.</p>
+            <h2>Transferfrage</h2>
+            <p>Wann ist <code>py.exec</code> ein sinnvolles Werkzeug und wann wird es zum Symptom schlechter Modellierung</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

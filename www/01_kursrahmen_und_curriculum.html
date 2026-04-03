@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kursrahmen und Curriculum</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Kursrahmen und Curriculum</h1>
+            <h2>Kurstitel</h2>
+            <p>Nova Language Grundkurs: Einfuehrung in deklarative, datenflussorientierte und runtime-nahe Programmierung mit <code>.ns</code></p>
+            <h2>Kursformat</h2>
+            <p>Empfohlen wird ein Grundkurs mit zehn Modulen. Je nach Lehrform eignet sich:</p>
+            <ul>
+                <li>Intensivformat: 5 Termine zu je 180 Minuten</li>
+                <li>Semesterformat: 10 Termine zu je 90 Minuten</li>
+                <li>Unternehmensformat: 2 Tage plus Praxistag</li>
+            </ul>
+            <h2>Vorkenntnisse</h2>
+            <p>Empfohlen, aber nicht zwingend:</p>
+            <ul>
+                <li>grundlegendes Verstaendnis von Dateien, Ordnern und Kommandozeile</li>
+                <li>erste Erfahrungen mit Python, JavaScript oder Shell</li>
+                <li>Basisbegriffe wie Wert, Funktion, Liste und Dictionary</li>
+            </ul>
+            <h2>Lernziele des Gesamtkurses</h2>
+            <p>Die Teilnehmenden koennen nach Abschluss:</p>
+            <ul>
+                <li>einfache und mittlere <code>.ns</code>-Programme lesen und erklaeren</li>
+                <li>ein kleines Nova-Projekt mit mehreren Dateien strukturieren</li>
+                <li>Daten ueber <code>dataset</code> modellieren</li>
+                <li>Verhalten ueber <code>flow</code> beschreiben</li>
+                <li>persistierten Zustand ueber <code>state</code> verwalten</li>
+                <li>Ereignisse ueber <code>event</code> modellieren</li>
+                <li>Tools und Agenten als Sprachobjekte einsetzen</li>
+                <li>die Python-Bruecke gezielt und begrenzt nutzen</li>
+                <li>OOP-Denken auf das Nova-Objektmodell uebertragen</li>
+            </ul>
+            <h2>Moduluebersicht</h2>
+            <h3>Modul 1</h3>
+            <p>Einstieg, Projektkontext, erstes Programm, <code>flow</code>, <code>system.log</code></p>
+            <h3>Modul 2</h3>
+            <p>Werte, Literale, Benennung, <code>dataset</code>, strukturierte Daten</p>
+            <h3>Modul 3</h3>
+            <p>Datenfluss, Aliase, <code>py.exec</code>, mehrstufige Transformation</p>
+            <h3>Modul 4</h3>
+            <p>Listen, Maps, Dictionary-Denken, Aggregation und Auswahl</p>
+            <h3>Modul 5</h3>
+            <p><code>state</code>, <code>event</code>, Reaktivitaet und zustandsbehaftete Programme</p>
+            <h3>Modul 6</h3>
+            <p><code>tool</code>, <code>agent</code>, einfache agentische Programme</p>
+            <h3>Modul 7</h3>
+            <p><code>system</code>, <code>package</code>, <code>service</code>, Plattform- und Runtime-Modell</p>
+            <h3>Modul 8</h3>
+            <p>Importe, Modularisierung, Projektorganisation, Mehrdatei-Programme</p>
+            <h3>Modul 9</h3>
+            <p>Python-Bruecke, pragmatische Transformation, Grenzen von <code>py.exec</code></p>
+            <h3>Modul 10</h3>
+            <p>OOP und Objektmodell in Nova Language, Wiederholung und Kursprojekt</p>
+            <h2>Zuordnung zum Python-Grundkurs</h2>
+            <p>Der Kurs folgt absichtlich einer klassischen Lernlogik:</p>
+            <ul>
+                <li>Hello World entspricht dem ersten <code>flow</code></li>
+                <li>Variablen werden ueber Aliase und <code>state</code> erklaert</li>
+                <li>Listen und Dictionaries werden ueber <code>dataset</code> und Transformationen gelehrt</li>
+                <li>Funktionen entsprechen in der Grunddidaktik den <code>flow</code>-Bausteinen</li>
+                <li>Module und Importe werden ueber mehrere <code>.ns</code>-Dateien eingefuehrt</li>
+                <li>OOP wird ueber benannte Sprachobjekte und Komposition erschlossen</li>
+            </ul>
+            <h2>Methodische Achsen</h2>
+            <p>Der Kurs sollte immer auf drei Ebenen unterrichten:</p>
+            <ul>
+                <li>Syntax: Wie schreibt man es</li>
+                <li>Semantik: Was bedeutet es</li>
+                <li>Runtime: Wie verhaelt es sich bei Ausfuehrung</li>
+            </ul>
+            <h2>Leistungsnachweise</h2>
+            <p>Empfohlen werden drei Leistungsformen:</p>
+            <ul>
+                <li>kurze Hausaufgaben nach Modul 2, 4 und 6</li>
+                <li>eine praktische Zwischenuebung nach Modul 5</li>
+                <li>eine kleine Abschlussarbeit oder Praesentation nach Modul 10</li>
+            </ul>
+            <h2>Minimaler technischer Aufbau</h2>
+            <ul>
+                <li>lokale Nova-shell-Installation</li>
+                <li>Zugriff auf <code>nova_shell.py</code> oder die Shell-Umgebung</li>
+                <li>Zugriff auf den Ordner <a href="src/data/Beispiele">NovaLanguage\Beispiele</a></li>
+            </ul>
+            <h2>Lehrreihenfolge</h2>
+            <p>Die Reihenfolge sollte nicht umgestellt werden, solange Lernende noch keine sichere Basis fuer Daten, Flows und State haben. Agenten, Services und OOP sollten nicht vor den Grundlagen gelehrt werden.</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

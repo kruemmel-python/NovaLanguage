@@ -1,0 +1,10 @@
+dataset numbers {
+  items: [{value: 3}, {value: 5}, {value: 8}]
+}
+
+flow sum_numbers {
+  py.exec "sum(item['value'] for item in _)" numbers -> total
+  py.exec "'Gesamtsumme: {}'.format(_)" total -> summary
+  system.log summary
+}
+

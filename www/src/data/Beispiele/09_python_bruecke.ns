@@ -1,0 +1,10 @@
+dataset records {
+  items: [{name: "Anna", value: 5}, {name: "Boris", value: 3}, {name: "Anna", value: 7}]
+}
+
+flow normalize_records {
+  py.exec "{item['name'].lower(): item['value'] for item in _}" records -> last_value_by_name
+  py.exec "'Eintraege: {}'.format(len(_))" records -> count_text
+  system.log last_value_by_name
+  system.log count_text
+}

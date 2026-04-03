@@ -1,0 +1,10 @@
+import "08_import_shared.ns"
+
+system course_imports {
+  namespace: nova_language_imports
+}
+
+flow imported_demo {
+  helper summarize shared_notes -> summary
+  system.log summary
+}

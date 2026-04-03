@@ -1,0 +1,27 @@
+state review_memory {
+  namespace: nova_language_reviews
+}
+
+tool announce {
+  command: system.log {{value0}}
+  capability: cpu
+}
+
+agent reviewer {
+  provider: shell
+  model: active
+  memory: review_memory
+  tools: [announce]
+  system_prompt: "Du bist ein einfacher Tutor-Agent fuer den Nova-Language-Grundkurs."
+  prompts: {v1: "Fasse den folgenden Input in genau einem Satz zusammen.\n\n{{input}}"}
+  prompt_version: v1
+}
+
+dataset notes {
+  items: [{text: "Nova Language nutzt Flows fuer Verhalten."}, {text: "Datasets beschreiben strukturierte Eingaben."}]
+}
+
+flow review_notes {
+  reviewer summarize notes -> summary
+  announce summary
+}

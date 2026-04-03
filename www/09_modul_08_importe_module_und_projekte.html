@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 08: Importe, Module und Projekte</title>
+    <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 08: Importe, Module und Projekte</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden lernen, wie <code>.ns</code>-Programme ueber mehrere Dateien organisiert werden und warum Modularisierung auch in Nova Language fuer Lesbarkeit und Wartbarkeit entscheidend ist.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li><code>import</code> lesen und einsetzen</li>
+                <li>gemeinsame Bausteine auslagern</li>
+                <li>Dateien sinnvoll benennen und strukturieren</li>
+                <li>ein kleines Mehrdatei-Projekt ueberblicken</li>
+            </ul>
+            <h2>Beispiele</h2>
+            <ul>
+                <li><a href="src/data/Beispiele/08_import_shared.ns">08_import_shared.ns</a></li>
+                <li><a href="src/data/Beispiele/08_import_main.ns">08_import_main.ns</a></li>
+            </ul>
+            <h2>Fachlicher Kern</h2>
+            <p>Sprachunterricht auf Grundkursniveau sollte spaetestens an dieser Stelle zeigen, dass gutes Programmieren immer auch gute Struktur bedeutet. Nova Language hat dafuer den gleichen Anspruch wie andere Sprachen:</p>
+            <ul>
+                <li>nicht alles in eine Datei</li>
+                <li>Bausteine gezielt auslagern</li>
+                <li>Wiederverwendung und Lesbarkeit verbessern</li>
+            </ul>
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">@'
+from pathlib import Path
+from nova.runtime.runtime import NovaRuntime
+path = Path(r".\NovaLanguage\Beispiele\08_import_main.ns").resolve()
+source = path.read_text(encoding="utf-8")
+with NovaRuntime() as runtime:
+    runtime.load(source, source_name=str(path), base_path=path.parent)
+    print("Mehrdatei-Programm erfolgreich geladen.")
+'@ | python -</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+            <h3>Phase 1: Problemstellung</h3>
+            <ul>
+                <li>Wann wird eine Datei zu gross</li>
+                <li>Warum Wiederverwendung wichtig ist</li>
+            </ul>
+            <h3>Phase 2: Importsyntax</h3>
+            <ul>
+                <li>importierte Datei</li>
+                <li>gemeinsame Deklarationen</li>
+                <li>Hauptdatei mit Flow</li>
+            </ul>
+            <h3>Phase 3: Projektstruktur</h3>
+            <ul>
+                <li>Shared-Datei</li>
+                <li>Main-Datei</li>
+                <li>Benennungskonventionen</li>
+            </ul>
+            <h3>Phase 4: Praxis</h3>
+            <ul>
+                <li>Agent und Dataset in Shared-Datei</li>
+                <li>Flow in Main-Datei</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>Import</li>
+                <li>Modul</li>
+                <li>Projektstruktur</li>
+                <li>Wiederverwendung</li>
+                <li>Hauptdatei</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li>zu grosse Sammeldateien</li>
+                <li>unklare Dateinamen</li>
+                <li>Zirkularitaet oder unnoetige Abhaengigkeiten</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Lagere einen weiteren Baustein in die Shared-Datei aus.</li>
+                <li>Erstelle eine zweite Main-Datei mit anderer Nutzung derselben Bausteine.</li>
+                <li>Benenne die Dateien fuer ein Schulungsprojekt um.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Baue ein Mini-Projekt mit mindestens zwei <code>.ns</code>-Dateien, einer Shared-Datei und einer Hauptdatei.</p>
+            <h2>Transferfrage</h2>
+            <p>Welche Rolle spielt Modularisierung fuer Unterricht, Wartung und Teamarbeit</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>
