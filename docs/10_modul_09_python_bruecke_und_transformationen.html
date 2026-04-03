@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modul 09: Python-Brücke und Transformationen</title>
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
         </nav>
     </header>
     <main>
-        <aside class="sidebar">
+                <aside class="sidebar">
             <h2>Module</h2>
             <ul>
                 <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
@@ -23,9 +23,12 @@
                 <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
                 <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
                 <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
                 <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
                 <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
                 <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
                 <li><a href="beispiele_readme.html">Beispiele README</a></li>
             </ul>
         </aside>
@@ -41,7 +44,7 @@
                 <li>Grenzen und Risiken ueberladener <code>py.exec</code>-Bloecke erkennen</li>
             </ul>
             <h2>Beispiel</h2>
-            <p>- <a href="src/data/Beispiele/09_python_bruecke.ns">09_python_bruecke.ns</a></p>
+            <p>- <a href="09_python_bruecke.ns">09_python_bruecke.ns</a></p>
             <h2>Fachlicher Kern</h2>
             <p>Die Python-Bruecke ist fuer den Grundkurs didaktisch sehr wertvoll:</p>
             <ul>
@@ -53,6 +56,39 @@
                 <li>so viel Nova wie moeglich</li>
                 <li>so viel Python wie noetig</li>
             </ul>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Dieses Modul zeigt die Python-Bruecke als pragmatisches Werkzeug. Nova bleibt die aeussere Struktur, waehrend Python kleine Transformationen uebernimmt.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">dataset records {
+  items: [{name: "Anna", value: 5}, {name: "Boris", value: 3}, {name: "Anna", value: 7}]
+}
+
+flow normalize_records {
+  py.exec "{item['name'].lower(): item['value'] for item in _}" records -&gt; last_value_by_name
+  py.exec "'Eintraege: {}'.format(len(_))" records -&gt; count_text
+  system.log last_value_by_name
+  system.log count_text
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>dataset records</code>: Liste von Datensaetzen mit Namen und Werten.</li>
+<li><code>py.exec ... records -&gt; last_value_by_name</code>: Aus der Liste entsteht eine Map mit kleingeschriebenen Namen als Schluessel. Weil <code>Anna</code> zweimal vorkommt, bleibt der spaetere Wert bestehen.</li>
+<li><code>py.exec ... records -&gt; count_text</code>: Gleichzeitig wird ein kurzer Bericht ueber die Anzahl der Eintraege gebildet.</li>
+<li><code>system.log ...</code>: Beide Ergebnisse werden ausgegeben.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Die Runtime uebergibt das Dataset an zwei kleine Python-Transformationen.</li>
+<li>Die erste berechnet eine normalisierte Nachschlagstruktur.</li>
+<li>Die zweite erzeugt einen lesbaren Textbericht.</li>
+<li>Nova uebernimmt anschliessend wieder die Weitergabe und Ausgabe dieser Ergebnisse.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>Didaktisch ist das der Punkt, an dem Python-Vorkenntnisse helfen. Trotzdem bleibt wichtig: Python loest hier nur lokale Transformationsaufgaben. Das Gesamtmodell aus Datenquelle, Schritten, Aliasen und Ausgabe bleibt Nova.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p>Wer hier nur auf die Python-Snippets schaut, verpasst den eigentlichen Punkt des Moduls. Nova ist nicht der Container fuer Python, sondern die Sprache, die den uebergeordneten Ablauf modelliert.</p>
+
             <h2>Live-Demo</h2>
             <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\09_python_bruecke.ns"
 ns.run .\NovaLanguage\Beispiele\09_python_bruecke.ns</code></pre>

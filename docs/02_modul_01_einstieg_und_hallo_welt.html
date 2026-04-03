@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modul 01: Einstieg und Hallo Welt</title>
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
         </nav>
     </header>
     <main>
-        <aside class="sidebar">
+                <aside class="sidebar">
             <h2>Module</h2>
             <ul>
                 <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
@@ -23,9 +23,12 @@
                 <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
                 <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
                 <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
                 <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
                 <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
                 <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
                 <li><a href="beispiele_readme.html">Beispiele README</a></li>
             </ul>
         </aside>
@@ -41,7 +44,7 @@
                 <li><code>system.log</code> als einfachste sichtbare Aktion nutzen</li>
             </ul>
             <h2>Beispiel</h2>
-            <p>- <a href="src/data/Beispiele/01_hallo_welt.ns">01_hallo_welt.ns</a></p>
+            <p>- <a href="01_hallo_welt.ns">01_hallo_welt.ns</a></p>
             <h2>Fachlicher Kern</h2>
             <p>Im klassischen Python-Grundkurs beginnt man mit <code>print("Hello World")</code>. In Nova Language beginnt der Kurs mit einem <code>flow</code>, der ein sichtbares Verhalten ausfuehrt.</p>
             <p>Die entscheidende didaktische Botschaft lautet:</p>
@@ -50,6 +53,32 @@
                 <li>Es beschreibt Verhalten in einer strukturierten, deklarativen Form.</li>
                 <li>Dieses Verhalten wird ueber <code>flow</code> organisiert.</li>
             </ul>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Dieses Beispiel ist das kleinstmoegliche sichtbare Nova-Programm. Es zeigt bereits drei Kernideen der Sprache: Verhalten wird in einem <code>flow</code> beschrieben, eine Operation wird ueber ihren fachlichen Kontext angesprochen und das Ergebnis kann ueber einen Alias weitergereicht werden.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">flow hello_world {
+  system.log "Hallo Nova Language" -&gt; message
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>flow hello_world</code>: Hier wird eine benannte Verhaltenseinheit definiert. <code>hello_world</code> ist nicht bloss ein Label, sondern der Name eines ausfuehrbaren Ablaufs.</li>
+<li><code>system.log</code>: Die Runtime nimmt aus dem Systembereich die Operation <code>log</code>. Der Code sagt also nicht nur <em>drucke Text aus</em>, sondern nutzt bewusst einen sprachlichen Baustein mit Systemkontext.</li>
+<li><code>"Hallo Nova Language"</code>: Das ist das Eingabe-Literal fuer diese Operation.</li>
+<li><code>-&gt; message</code>: Das Ergebnis des Schritts bekommt den Alias <code>message</code>. Auch wenn das Minimalbeispiel den Alias danach nicht weiter nutzt, zeigt es schon das Datenflussmodell der Sprache.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Die Datei wird geladen und der Flow <code>hello_world</code> wird als Verhaltenseinheit registriert.</li>
+<li>Beim Ausfuehren wird die Operation <code>system.log</code> aktiviert.</li>
+<li>Der String <code>"Hallo Nova Language"</code> wird als Eingabe uebergeben und ausgegeben.</li>
+<li>Das Resultat dieser Operation wird intern unter <code>message</code> verfuegbar gemacht.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>In Python waere die sichtbare Wirkung aehnlich zu <code>print("Hallo Nova Language")</code>. Didaktisch ist Nova hier aber groesser gedacht: Nicht nur <em>mache Ausgabe</em>, sondern <em>beschreibe Verhalten, Operation und Ergebnisfluss</em>.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p><code>flow</code> ist hier nicht bloss ein Container und <code>system.log</code> nicht nur ein anderes <code>print</code>. Das Beispiel ist die kleinste Form eines deklarativen Ablaufmodells.</p>
+
             <h2>Live-Demo</h2>
             <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\01_hallo_welt.ns"
 ns.run .\NovaLanguage\Beispiele\01_hallo_welt.ns</code></pre>

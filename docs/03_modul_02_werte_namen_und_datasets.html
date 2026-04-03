@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modul 02: Werte, Namen und Datasets</title>
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
         </nav>
     </header>
     <main>
-        <aside class="sidebar">
+                <aside class="sidebar">
             <h2>Module</h2>
             <ul>
                 <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
@@ -23,9 +23,12 @@
                 <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
                 <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
                 <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
                 <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
                 <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
                 <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
                 <li><a href="beispiele_readme.html">Beispiele README</a></li>
             </ul>
         </aside>
@@ -41,7 +44,7 @@
                 <li>gute Namen fuer Datensaetze und Felder vergeben</li>
             </ul>
             <h2>Beispiel</h2>
-            <p>- <a href="src/data/Beispiele/02_datasets_und_literale.ns">02_datasets_und_literale.ns</a></p>
+            <p>- <a href="02_datasets_und_literale.ns">02_datasets_und_literale.ns</a></p>
             <h2>Fachlicher Kern</h2>
             <p>Im Python-Kurs spricht man frueh ueber Strings, Integer, Booleans, Listen und Dictionaries. In Nova Language wird dieselbe Denkweise ueber Literale und <code>dataset</code>-Strukturen vermittelt.</p>
             <p>Didaktisch wichtig:</p>
@@ -58,6 +61,38 @@
                 <li>Liste: <code>["intro", "nova", "grundkurs"]</code></li>
                 <li>Map: <code>{title: "Nova", lessons: 10}</code></li>
             </ul>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Dieses Modul fuehrt den Schritt von einzelnen Werten zu strukturierten Daten ein. Das Beispiel kombiniert ein <code>dataset</code> mit einem kleinen <code>flow</code>, der diese Daten in eine gut lesbare Textform ueberfuehrt.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">dataset course_info {
+  items: [{title: "Nova Language Grundkurs", lessons: 10, active: true, tags: ["intro", "nova", "grundkurs"]}, {title: "Nova Language Uebung", lessons: 3, active: false, tags: ["uebung", "praxis"]}]
+}
+
+flow show_course_info {
+  py.exec "json.dumps(_, ensure_ascii=False, indent=2)" course_info -&gt; info
+  system.log info
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>dataset course_info</code>: Es wird ein benanntes Datenobjekt definiert. Der Name beschreibt, dass es sich um Kursinformationen handelt.</li>
+<li><code>items</code>: Das Feld enthaelt eine Liste von Eintraegen. Jeder Eintrag ist eine Map mit klaren Schluesseln wie <code>title</code>, <code>lessons</code>, <code>active</code> und <code>tags</code>.</li>
+<li><code>flow show_course_info</code>: Der Flow beschreibt das Verhalten, das auf diesen Daten ausgefuehrt werden soll.</li>
+<li><code>py.exec ... course_info -&gt; info</code>: Die Python-Bruecke bekommt das Dataset als Eingabe, serialisiert die Struktur als formatierten JSON-Text und speichert das Ergebnis unter <code>info</code>.</li>
+<li><code>system.log info</code>: Der formatierte Text wird sichtbar ausgegeben.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Das Dataset <code>course_info</code> wird als strukturierte Datenquelle bereitgestellt.</li>
+<li>Der Flow <code>show_course_info</code> liest dieses Dataset ein.</li>
+<li><code>py.exec</code> sieht die Eingabedaten ueber <code>_</code> und formt daraus einen lesbaren Text.</li>
+<li>Der Alias <code>info</code> uebergibt dieses Zwischenergebnis an <code>system.log</code>.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>In Python waere das am ehesten eine Liste von Dictionaries plus <code>json.dumps(...)</code>. Nova trennt hier aber sauber zwischen <em>Datenobjekt</em> und <em>Verhalten</em>.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p>Ein <code>dataset</code> ist nicht bloss eine Datei und auch nicht einfach nur eine Variable. Es ist ein benannter, deklarierter Datenbaustein im Sprachmodell.</p>
+
             <h2>Live-Demo</h2>
             <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\02_datasets_und_literale.ns"
 ns.run .\NovaLanguage\Beispiele\02_datasets_und_literale.ns</code></pre>

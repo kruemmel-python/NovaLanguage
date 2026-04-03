@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 05: State und Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 05: State und Events</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden lernen, wie Nova Language Zustand ueber <code>state</code> speichert und Verhalten ueber <code>event</code> reaktiv ausloesen kann.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li><code>state</code> als persistierbaren Laufzeitzustand verstehen</li>
+                <li><code>event.emit</code> und Event-Bindungen lesen</li>
+                <li>lokale Aliase und persistierten Zustand unterscheiden</li>
+                <li>reaktive Programme von linearen Skripten unterscheiden</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="05_state_und_events.ns">05_state_und_events.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>Dieses Modul markiert den Uebergang von rein linearen Flows zu Programmen mit Zustand und Reaktivitaet. Lernende sollen erkennen, dass Nova Language nicht nur Berechnungen beschreibt, sondern auch zeitliche und systemische Ausloeser modellieren kann.</p>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Dieses Modul fuehrt zwei neue Ebenen ein: persistierbaren Zustand und reaktive Ausloeser. Das Programm berechnet nicht nur einen Wert, sondern speichert ihn und meldet anschliessend ein Ereignis an die Runtime.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">state lesson_state {
+  namespace: nova_language_course
+}
+
+dataset metrics {
+  items: [{value: 4}, {value: 6}, {value: 10}]
+}
+
+flow compute_metrics {
+  py.exec "sum(item['value'] for item in _)" metrics -&gt; total
+  state.set latest_total total
+  event.emit metrics.ready total
+}
+
+event schedule_tick {
+  on: schedule.tick
+  flow: compute_metrics
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>state lesson_state</code>: Ein benannter Zustandsbereich wird definiert. Der Namespace trennt diesen Zustand logisch von anderem Zustand.</li>
+<li><code>dataset metrics</code>: Eingabedaten fuer die Berechnung.</li>
+<li><code>flow compute_metrics</code>: Verhaltenseinheit fuer die Verarbeitung.</li>
+<li><code>py.exec ... metrics -&gt; total</code>: Summe aller <code>value</code>-Felder.</li>
+<li><code>state.set latest_total total</code>: Das Zwischenergebnis wird nicht nur lokal benutzt, sondern unter dem Schluessel <code>latest_total</code> im Runtime-Zustand gespeichert.</li>
+<li><code>event.emit metrics.ready total</code>: Nach der Berechnung wird ein Ereignis erzeugt, das anderen Teilen des Systems mitteilen kann: Die Metriken sind fertig.</li>
+<li><code>event schedule_tick</code>: Diese Deklaration verbindet ein eingehendes Ereignis <code>schedule.tick</code> mit dem Flow <code>compute_metrics</code>.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Ein Tick-Ereignis der Runtime trifft ein.</li>
+<li>Dadurch wird <code>compute_metrics</code> gestartet.</li>
+<li>Die Daten aus <code>metrics</code> werden summiert.</li>
+<li>Das Resultat wird in den Zustand geschrieben.</li>
+<li>Anschliessend wird ein neues Ereignis ausgesendet, das die Fertigstellung signalisiert.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>In Python waere das eine Mischung aus Variablen, einem Speicherobjekt und einem Callback- oder Event-System. Nova fuehrt diese Aspekte direkt im Sprachmodell zusammen.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p><code>state</code> ist nicht dasselbe wie ein normaler Alias. <code>total</code> ist lokal im Flow. <code>latest_total</code> ist dagegen ein benannter Eintrag im persistierbaren Zustand.</p>
+
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\05_state_und_events.ns"
+ns.run .\NovaLanguage\Beispiele\05_state_und_events.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+                        <h3>Phase 1: Zustand einordnen</h3>
+            <ul>
+                <li>Was ist lokaler Alias</li>
+                <li>Was ist persistierbarer Zustand</li>
+            </ul>
+            <h3>Phase 2: Ereignisse lesen</h3>
+            <ul>
+                <li>Was bedeutet <code>event.emit</code></li>
+                <li>Wie verbindet ein <code>event</code> einen Ausloeser mit einem Flow</li>
+            </ul>
+            <h3>Phase 3: Ablauf analysieren</h3>
+            <ul>
+                <li>Daten summieren</li>
+                <li>Ergebnis speichern</li>
+                <li>Folgeereignis senden</li>
+            </ul>
+            <h3>Phase 4: Transfer</h3>
+            <ul>
+                <li>Timer, Sensoren oder Statuswechsel als reale Ausloeser diskutieren</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>State</li>
+                <li>Namespace</li>
+                <li>Event</li>
+                <li>Emit</li>
+                <li>Reaktivitaet</li>
+                <li>Trigger</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li><code>state</code> mit einem normalen Alias verwechseln</li>
+                <li>denken, dass <code>event</code> nur ein Kommentar zur Dokumentation ist</li>
+                <li>reaktive Programme wie rein lineare Skripte lesen</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Erweitere das Dataset um einen weiteren Messwert.</li>
+                <li>Speichere zusaetzlich die Anzahl der Messwerte im Zustand.</li>
+                <li>Benenne das Folgeereignis so um, dass sein Zweck fachlich klarer wird.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Erstelle ein eigenes Beispiel mit einem <code>state</code>, einem <code>flow</code> und einem <code>event</code>, das auf ein eingehendes Signal reagiert.</p>
+            <h2>Transferfrage</h2>
+            <p>Warum ist <code>state</code> fuer viele Nova-Programme naeher an einem Systemgedaechtnis als an einer normalen lokalen Variablen?</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

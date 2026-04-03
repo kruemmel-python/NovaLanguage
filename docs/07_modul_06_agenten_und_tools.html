@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modul 06: Agenten und Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Nova Language Grundkurs</h1>
+        <nav>
+            <a href="index.html">Startseite</a>
+        </nav>
+    </header>
+    <main>
+        <aside class="sidebar">
+            <h2>Module</h2>
+            <ul>
+                <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
+                <li><a href="01_kursrahmen_und_curriculum.html">Kursrahmen und Curriculum</a></li>
+                <li><a href="02_modul_01_einstieg_und_hallo_welt.html">Modul 01: Einstieg und Hallo Welt</a></li>
+                <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
+                <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
+                <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
+                <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
+                <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
+                <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
+                <li><a href="beispiele_readme.html">Beispiele README</a></li>
+            </ul>
+        </aside>
+        <article class="content">
+            <h1>Modul 06: Agenten und Tools</h1>
+            <h2>Ziel des Moduls</h2>
+            <p>Die Teilnehmenden lernen, wie Nova Language agentische Bausteine und Werkzeuge als benannte Sprachobjekte beschreibt und in Flows einbindet.</p>
+            <h2>Lernziele</h2>
+            <ul>
+                <li><code>tool</code> und <code>agent</code> deklarativ lesen</li>
+                <li>Prompts, Speicher und Werkzeuge als Teile eines Agenten verstehen</li>
+                <li>agentische Schritte im Flow verorten</li>
+                <li>wiederverwendbare Tools von direkter Operation unterscheiden</li>
+            </ul>
+            <h2>Beispiel</h2>
+            <p>- <a href="06_agent_und_tool.ns">06_agent_und_tool.ns</a></p>
+            <h2>Fachlicher Kern</h2>
+            <p>Mit diesem Modul erweitert sich der Kurs von klassischen Grundkonzepten auf agentische Programme. Entscheidend ist, dass Agenten nicht mystisch unterrichtet werden, sondern als sauber definierte Sprachobjekte mit Rollen, Speicher und Werkzeugen.</p>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Dieses Modul zeigt, dass Nova Language nicht nur Daten und klassische Verarbeitungsschritte beschreiben kann, sondern auch agentisches Verhalten und wiederverwendbare Werkzeuge als Sprachobjekte modelliert.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">state review_memory {
+  namespace: nova_language_reviews
+}
+
+tool announce {
+  command: system.log {{value0}}
+  capability: cpu
+}
+
+agent reviewer {
+  provider: shell
+  model: active
+  memory: review_memory
+  tools: [announce]
+  system_prompt: "Du bist ein einfacher Tutor-Agent fuer den Nova-Language-Grundkurs."
+  prompts: {v1: "Fasse den folgenden Input in genau einem Satz zusammen.
+
+{{input}}"}
+  prompt_version: v1
+}
+
+dataset notes {
+  items: [{text: "Nova Language nutzt Flows fuer Verhalten."}, {text: "Datasets beschreiben strukturierte Eingaben."}]
+}
+
+flow review_notes {
+  reviewer summarize notes -&gt; summary
+  announce summary
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>state review_memory</code>: Speicherbereich fuer den Agenten.</li>
+<li><code>tool announce</code>: Ein benanntes Werkzeug, das spaeter wiederverwendet werden kann. Hier ist das Werkzeug letztlich eine Log-Ausgabe.</li>
+<li><code>agent reviewer</code>: Der Agent wird mitsamt Provider, Modell, Speicher, Werkzeugen und Prompt-Verhalten beschrieben.</li>
+<li><code>dataset notes</code>: Die Eingabedaten, die der Agent zusammenfassen soll.</li>
+<li><code>reviewer summarize notes -&gt; summary</code>: Der Flow laesst den Agenten auf Basis seiner Definition eine Zusammenfassung erzeugen.</li>
+<li><code>announce summary</code>: Das Ergebnis wird nicht direkt via <code>system.log</code> geschrieben, sondern ueber das definierte Tool ausgegeben.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Die Runtime kennt einen Agenten, ein Tool, einen Speicherbereich und ein Dataset.</li>
+<li>Beim Start des Flows erhaelt der Agent die Daten aus <code>notes</code>.</li>
+<li>Der Agent verarbeitet diese Daten gemaess Prompt und Konfiguration zu <code>summary</code>.</li>
+<li>Danach wird das Tool <code>announce</code> mit diesem Ergebnis aufgerufen und fuehrt seine Systemoperation aus.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>In Python waere das eine Kombination aus Funktionsaufruf, Tool-Wrapper, Prompt-Konfiguration und Objektzustand. Nova beschreibt diese Rollen deklarativ als erstklassige Sprachbausteine.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p>Ein Agent ist hier nicht nur ein Chatfenster mit Textprompt. Er ist ein konfiguriertes Objekt mit Speicher, Werkzeugen und definierter Einbettung in den Datenfluss des Programms.</p>
+
+            <h2>Live-Demo</h2>
+            <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\06_agent_und_tool.ns"
+ns.run .\NovaLanguage\Beispiele\06_agent_und_tool.ns</code></pre>
+            <h2>90-Minuten-Ablauf</h2>
+                        <h3>Phase 1: Werkzeugdenken</h3>
+            <ul>
+                <li>Warum ein <code>tool</code> mehr ist als ein einzelner Befehl</li>
+                <li>Wiederverwendung ueber Benennung</li>
+            </ul>
+            <h3>Phase 2: Agent lesen</h3>
+            <ul>
+                <li>Provider, Modell, Speicher und Prompt auseinanderhalten</li>
+                <li>Warum der Agent ein konfiguriertes Objekt ist</li>
+            </ul>
+            <h3>Phase 3: Flow analysieren</h3>
+            <ul>
+                <li>Dataset als Input</li>
+                <li>Agentenschritt als Verarbeitung</li>
+                <li>Tool als Ausgabe</li>
+            </ul>
+            <h3>Phase 4: Diskussion</h3>
+            <ul>
+                <li>Wann ist ein Agent sinnvoll, wann reicht klassische Programmlogik</li>
+            </ul>
+            <h2>Zentrale Begriffe</h2>
+            <ul>
+                <li>Tool</li>
+                <li>Agent</li>
+                <li>Prompt</li>
+                <li>Memory</li>
+                <li>Provider</li>
+                <li>Capability</li>
+            </ul>
+            <h2>Typische Fehler</h2>
+            <ul>
+                <li>Agenten nur als Chatbots missverstehen</li>
+                <li>denken, dass ein Tool immer nur Shell-Syntax sei</li>
+                <li>nicht erkennen, dass Agenten in denselben Datenfluss eingebettet sind wie andere Schritte</li>
+            </ul>
+            <h2>Uebungen</h2>
+            <ol>
+                <li>Ersetze den Zusammenfassungs-Prompt durch eine Bewertungsfrage.</li>
+                <li>Fuege ein zweites Tool fuer eine andere Ausgabeform hinzu.</li>
+                <li>Erweitere das Dataset um einen dritten Merksatz.</li>
+            </ol>
+            <h2>Hausaufgabe</h2>
+            <p>Baue ein kleines Beispiel mit einem Agenten, einem Tool und einem Dataset, in dem der Agent einen kurzen Bericht erzeugt.</p>
+            <h2>Transferfrage</h2>
+            <p>Warum ist es didaktisch wichtig, Agenten in Nova Language als Sprachobjekte und nicht als magische Blackbox zu lehren?</p>
+        </article>
+    </main>
+    <footer>
+        <p>&copy; 2026 Nova Language Grundkurs</p>
+    </footer>
+</body>
+</html>

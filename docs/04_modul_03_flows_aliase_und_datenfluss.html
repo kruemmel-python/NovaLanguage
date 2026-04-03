@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modul 03: Flows, Aliase und Datenfluss</title>
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -14,7 +14,7 @@
         </nav>
     </header>
     <main>
-        <aside class="sidebar">
+                <aside class="sidebar">
             <h2>Module</h2>
             <ul>
                 <li><a href="00_dozentenleitfaden.html">Dozentenleitfaden</a></li>
@@ -23,9 +23,12 @@
                 <li><a href="03_modul_02_werte_namen_und_datasets.html">Modul 02: Werte, Namen und Datasets</a></li>
                 <li><a href="04_modul_03_flows_aliase_und_datenfluss.html">Modul 03: Flows, Aliase und Datenfluss</a></li>
                 <li><a href="05_modul_04_listen_maps_und_dictionaries.html">Modul 04: Listen, Maps und Dictionaries</a></li>
+                <li><a href="06_modul_05_state_und_events.html">Modul 05: State und Events</a></li>
+                <li><a href="07_modul_06_agenten_und_tools.html">Modul 06: Agenten und Tools</a></li>
                 <li><a href="08_modul_07_systeme_packages_und_services.html">Modul 07: Systeme, Packages und Services</a></li>
                 <li><a href="09_modul_08_importe_module_und_projekte.html">Modul 08: Importe, Module und Projekte</a></li>
                 <li><a href="10_modul_09_python_bruecke_und_transformationen.html">Modul 09: Python-Brücke und Transformationen</a></li>
+                <li><a href="11_modul_10_objektmodell_und_komposition.html">Modul 10: Objektmodell und Komposition</a></li>
                 <li><a href="beispiele_readme.html">Beispiele README</a></li>
             </ul>
         </aside>
@@ -41,7 +44,7 @@
                 <li>Datenfluss statt nur Befehlsabfolge erkennen</li>
             </ul>
             <h2>Beispiel</h2>
-            <p>- <a href="src/data/Beispiele/03_alias_und_datenfluss.ns">03_alias_und_datenfluss.ns</a></p>
+            <p>- <a href="03_alias_und_datenfluss.ns">03_alias_und_datenfluss.ns</a></p>
             <h2>Fachlicher Kern</h2>
             <p>Dies ist das erste Modul, in dem sich Nova Language klar von einem klassischen Skriptkurs unterscheidet. Lernende sollen verstehen:</p>
             <ul>
@@ -56,6 +59,39 @@ summary = f"Gesamtsumme: {total}"</code></pre>
             <p>Nova Language:</p>
             <pre><code class="language-ns">py.exec "sum(item['value'] for item in _)" numbers -> total
 py.exec '"Gesamtsumme: {}".format(_)' total -> summary</code></pre>
+            
+<h2>Code verstehen: Was passiert in diesem Beispiel?</h2>
+<p>Hier wird Nova Language erstmals als echte Datenfluss-Sprache sichtbar. Das Beispiel nimmt strukturierte Eingabedaten, berechnet daraus eine Summe, formt daraus einen Berichtstext und gibt diesen anschliessend aus.</p>
+<h3>Der Originalcode</h3>
+<pre><code class="language-ns">dataset numbers {
+  items: [{value: 3}, {value: 5}, {value: 8}]
+}
+
+flow sum_numbers {
+  py.exec "sum(item['value'] for item in _)" numbers -&gt; total
+  py.exec "'Gesamtsumme: {}'.format(_)" total -&gt; summary
+  system.log summary
+}</code></pre>
+<h3>Zeile fuer Zeile erklaert</h3>
+<ul>
+<li><code>dataset numbers</code>: Eingabedaten als Liste von Objekten mit dem Feld <code>value</code>.</li>
+<li><code>py.exec ... numbers -&gt; total</code>: Die Liste wird an Python uebergeben. Dort werden alle Werte aufsummiert. Das Ergebnis bekommt den Alias <code>total</code>.</li>
+<li><code>py.exec ... total -&gt; summary</code>: Der vorherige Alias wird zur neuen Eingabe. Aus der Zahl entsteht ein Text.</li>
+<li><code>system.log summary</code>: Der Berichtstext wird ausgegeben.</li>
+</ul>
+<h3>Was passiert zur Laufzeit?</h3>
+<ol>
+<li>Die Runtime kennt das Dataset <code>numbers</code> und den Flow <code>sum_numbers</code>.</li>
+<li>Der erste Schritt zieht die Liste aus dem Dataset und berechnet die Summe.</li>
+<li>Der Alias <code>total</code> speichert das Zwischenergebnis fuer den naechsten Schritt.</li>
+<li>Der zweite Schritt erzeugt aus der nackten Zahl eine sprechende Ausgabe.</li>
+<li>Der dritte Schritt macht dieses Endergebnis sichtbar.</li>
+</ol>
+<h3>Denkbruecke zu Python</h3>
+<p>In Python wuerde man typischerweise eine Variable <code>total</code> und danach eine Variable <code>summary</code> schreiben. Nova zeigt dieselbe Logik als benannten Strom von Zwischenergebnissen.</p>
+<h3>Typisches Missverstaendnis</h3>
+<p>Der Pfeil <code>-&gt;</code> ist kein Dekorationszeichen. Er ist der Kern des Beispiels, weil er das Resultat eines Schritts explizit benennt und damit den Datenfluss lesbar macht.</p>
+
             <h2>Live-Demo</h2>
             <pre><code class="language-powershell">python nova_shell.py -c "ns.graph .\NovaLanguage\Beispiele\03_alias_und_datenfluss.ns"
 ns.run .\NovaLanguage\Beispiele\03_alias_und_datenfluss.ns</code></pre>
